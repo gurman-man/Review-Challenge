@@ -127,3 +127,33 @@ extension Array {
 let points = [ 10, 20, 50, 100]
 let squared = points.myMap { $0 * $0 }
 print(squared)
+
+
+struct ClassMates {
+    let name: String
+    let subjects: [String: [Double]]
+    
+    var avarageGrades: [String: Double] {
+        return subjects.mapValues { grades in
+            Double(grades.reduce(0, +)) / Double(grades.count)
+        }
+    }
+}
+
+struct GroupDID11 {
+    var students: [ClassMates]
+}
+
+
+let group = GroupDID11(students: [
+    ClassMates(name: "Max ", subjects: ["Math": [90,85,88], "Physics": [75,80,70]]),
+    ClassMates(name: "Anna", subjects: ["Math": [60,70,80], "Physics": [55,65,60]])
+    
+])
+
+for student in group.students {
+    print(student.name)
+    for (subject, avg) in student.avarageGrades {
+        print("   \(subject): \(avg)")
+    }
+}

@@ -1,4 +1,6 @@
 import UIKit
+// reference type - клас
+// value     type - структури, enums, кортежі
 
 // Type Anotation
 var name: String
@@ -6,7 +8,21 @@ name = "Max"
 name = "Devid"
 
 // create constant
+// let створює immutable binding(посилання незмінне), але якщо це reference type(клас) то властивості цього об'єкта  - можна змінити.
 let integer = 5
+
+class User {
+    var name: String
+    
+    init(name: String) {
+        self.name = name
+    }
+}
+// приклад зміни об'єкта u
+let u = User(name: "Max")
+u.name = "Yarina"
+print(u.name)
+
 
 print(name)
 print(integer)
@@ -47,6 +63,6 @@ myAge = 20
 var isLogin: Bool
 isLogin = false
 
-// UInt - це Unsigned Integer - тільки додатні значення, 0 і більше.
+// UInt -  це Unsigned Integer - тільки додатні значення, 0 і більше.
 let minValue = UInt8.min
 let maxValue = UInt8.max
