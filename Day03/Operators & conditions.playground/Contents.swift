@@ -99,3 +99,6 @@ case 0..<85:
 default:
     print("You did great!")
 }
+
+let points = ...5
+print(points)

@@ -29,7 +29,6 @@ var devices = [String]()
 let colors = Set (["red", "green", "blue"])
 let colors2 =  Set(["red", "green", "blue", "red", "blue"]) // дублікати ігоруються
 
-
 // MARK: Tuples
 var name = (first: "Taylor", last: "Swift")
 name.0
