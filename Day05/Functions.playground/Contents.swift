@@ -34,30 +34,30 @@ print(result)
 print("------------------------------------------")
 
 
-// виклик функції через зовнішній параметр string
 func countLettersInString(myString str: String) {
     print("The String : \(str) has count \(str.count) letters.")
+    // str — внутрішнє ім’я (потрібно у тілі функції: print(str.count))
 }
-countLettersInString(myString: "Hello;")
+countLettersInString(myString: "Hello;")    // myString — зовнішнє ім’я (потрібно у виклику:)
 print("------------------------------------------")
 
 
-// виклик функції через зовнішній параметр in
 func countLetters(in string: String) {
     print("The string: \(string) has \(string.count) letters.")
-    // внутрішній параметр (string) - звертаємось у середині функції
+    // --- тут використовується внутрішнє ім’я (string), його видно тільки у тілі функції.
 }
 
-countLetters(in: "Hello;")  // зовнішній параметр (in) - викликається під час виклику функції
+countLetters(in: "Hello;")  // <-- тут використовується зовнішнє ім’я (in), воно не існує всередині функції, лише у момент виклику.
 print("------------------------------------------")
 
 
 // Пропус мітки аргументу у функції
+// Викликати функцію — можна лише через зовнішнє ім’я (або без нього, якщо ти _ поставив).
 func greet(_ person: String) {
     print("Hello, \(person)!")
 }
 
-greet("Taylor")
+greet("Taylor")  // <-- без зовнішнього імені
 print("------------------------------------------")
 
 
@@ -67,12 +67,13 @@ func findDirections(from: String, to: String, route: String = "fastest", avoidHi
 }
 
 findDirections(from: "London", to: "Glasgow")
-findDirections(from: "London", to: "Glasgow", route: "scenic")
-findDirections(from: "London", to: "Glasgow", route: "scenic", avoidHighways: true)
+// викликали функцію з параметрами за замовчуванням route: String = "fastest", avoidHighways: Bool = false
+findDirections(from: "London", to: "Glasgow", route: "scenic")      // змінили параметер за замовчуванням
+findDirections(from: "London", to: "Glasgow", route: "scenic", avoidHighways: true) // тут також
 print("------------------------------------------")
 
 
-// Variadic functions (варіаційні)
+// Variadic parameters (варіаційні параметри)
 func printNumbers(numbers: Int...) {
     for number in numbers {
         print(number)
@@ -92,10 +93,10 @@ func checkPassword(_ password: String) throws -> Bool {
     if password == "password" {
         throw PasswordError.obvious
     }
-    
     return true
 }
 
+// виклик відбувається через блок do-catch
 do {
     try checkPassword("password")
     print("That password is good!")
