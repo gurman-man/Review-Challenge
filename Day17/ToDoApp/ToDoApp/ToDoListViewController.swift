@@ -7,17 +7,22 @@
 
 import UIKit
 
+extension ToDoListViewController: TaskDetailDelegate {
+    func taskDetailVC(_ controller: TaskDetailViewController, didSaveTask task: String) {
+        tasks.append(task)
+        tableView.reloadData()
+    }
+}
+
 class ToDoListViewController: UITableViewController {
     var tasks: [String] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "ToDo List"
-        
+        title = "ToDoApp"
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(addTask))
     }
-    
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tasks.count
@@ -55,10 +60,8 @@ class ToDoListViewController: UITableViewController {
     @objc func addTask() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let detailVC = storyboard.instantiateViewController(withIdentifier: "TaskDetailVC") as? TaskDetailViewController {
-            detailVC.onSave = { newTask in
-                self.tasks.append(newTask)
-                self.tableView.reloadData()
-            }
+            // ❗️Встановлюємо делегата
+            detailVC.delegate = self
             navigationController?.pushViewController(detailVC, animated: true)
         }
     }

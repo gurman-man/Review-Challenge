@@ -7,16 +7,21 @@
 
 import UIKit
 
+protocol TaskDetailDelegate: AnyObject {
+    func taskDetailVC(_ controller: TaskDetailViewController, didSaveTask task: String)
+}
+
 class TaskDetailViewController: UIViewController {
+    weak var delegate: TaskDetailDelegate?
 
     @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak var taskTextField: UITextField!
     
     var taskText: String?
-    var onSave: ((String) -> Void)? // новий параметр
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("viewDidLoad")
         
         title = taskText == nil ? "New Task" : "Task Detail"
         infoLabel.text = taskText ?? "Enter your task"
@@ -27,8 +32,9 @@ class TaskDetailViewController: UIViewController {
     @IBAction func saveButton(_ sender: UIButton) {
         sender.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
         guard let text = taskTextField.text, !text.isEmpty else { return }
-        onSave?(text) // повертаємо текст назад у список
+        delegate?.taskDetailVC(self, didSaveTask: text) // повертаємо текст назад у список
+        navigationController?.popViewController(animated: true)
         infoLabel.text = "You enter: \(text)"
     }
-    
+
 }

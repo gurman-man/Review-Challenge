@@ -73,3 +73,12 @@ let doubled1 = randomNumbers.map { (number: Int) -> Int in
     number * 2
 }
 print("Doubled1: \(doubled1)")
+
+
+let humanName: (String) -> String = { name in
+    return "Hello, \(name)!"
+}
+
+print(humanName("Olha"))
+print(humanName("Max"))
+print(humanName("Andrew"))
