@@ -8,13 +8,15 @@
 import UIKit
 
 class ViewController: UIViewController {
+    // MARK: - Outlets
     @IBOutlet weak var imageView1: UIImageView!
     @IBOutlet weak var imageView2: UIImageView!
     @IBOutlet weak var imageView3: UIImageView!
-    
+
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     
+    // URL-адреси картинок
     let imageURLs = [
         URL(string: "https://picsum.photos/1920/1080")!,
         URL(string: "https://picsum.photos/1920/1080")!,
@@ -29,34 +31,34 @@ class ViewController: UIViewController {
     // MARK: - GCD
     func loadImagesWithGCD() {
         let imageViews = [imageView1, imageView2, imageView3]
-        activityIndicator.startAnimating()
-        view.isUserInteractionEnabled = false
-        let startTime = Date()
+        activityIndicator.startAnimating()                          // стартуємо індикатор
+        view.isUserInteractionEnabled = false                       // блокуємо взаємодію з користувачем
+        let startTime = Date()                                      // відмічаємо початок завантаження
         
-        let dispatchGroup = DispatchGroup()
+        let dispatchGroup = DispatchGroup()                         // створюємо групу задач
         
         for (index, url) in imageURLs.enumerated() {
-            dispatchGroup.enter()
+            dispatchGroup.enter()                                   // повідомляємо групу, що задача почалася
             
             // Використовуємо URLSession замість Data(contentsOf:)
             URLSession.shared.dataTask(with: url) { data, response, error in
-                if let data, let image = UIImage(data: data) {
+                if let data, let image = UIImage(data: data) {      // оновлюємо UI на головному потоці
                     DispatchQueue.main.async {
                         if index < imageViews.count { // безпечний доступ
                             imageViews[index]?.image = image
                         }
-                        dispatchGroup.leave()
+                        dispatchGroup.leave()                        // повідомляємо, що задача завершилася
                     }
                 } else {
                     print("GCD error: \(error?.localizedDescription ?? "unknown")")
-                    dispatchGroup.leave()
+                    dispatchGroup.leave()                           // навіть при помилці виходимо з групи
                 }
             }.resume()
         }
         
-        dispatchGroup.notify(queue: .main) {
-            self.activityIndicator.stopAnimating()
-            self.view.isUserInteractionEnabled = true
+        dispatchGroup.notify(queue: .main) {                        // коли всі задачі завершаться
+            self.activityIndicator.stopAnimating()                  // зупиняємо індикатор
+            self.view.isUserInteractionEnabled = true               // розблоковуємо UI
             let endTime = Date()
             let duration = endTime.timeIntervalSince(startTime)
             print("GCD завантаження тривало \(duration) секунд")
@@ -67,18 +69,21 @@ class ViewController: UIViewController {
     func loadImagesWithAsyncAwait() async {
         let imageViews = [imageView1, imageView2, imageView3]
         await MainActor.run {
-            activityIndicator.startAnimating()
-            view.isUserInteractionEnabled = false
+            activityIndicator.startAnimating()               // стартуємо індикатор
+            view.isUserInteractionEnabled = false            // блокуємо UI
         }
-        let startTime = Date()
+        let startTime = Date()                               //Запам’ятовуємо початковий чаc
         
         await withTaskGroup(of: (Int, UIImage?).self) { group in
             for (index, url) in imageURLs.enumerated() {
                 group.addTask {
                     do {
                         let (data, _) = try await URLSession.shared.data(from: url)
+                        // Асинхронно завантажуємо дані картинки з інтернету.
                         let image = UIImage(data: data)
+                        // Перетворюємо отримані дані на картинку.
                         return (index, image)
+                        // Повертаємо індекс і картинку як результат задачі.
                     } catch {
                         print("Async error: \(error)")
                         return (index, nil)
@@ -96,8 +101,8 @@ class ViewController: UIViewController {
         }
         
         await MainActor.run {
-            activityIndicator.stopAnimating()
-            view.isUserInteractionEnabled = true
+            activityIndicator.stopAnimating()       // зупиняємо індикатор
+            view.isUserInteractionEnabled = true    // розблоковуємо UI
             let endTime = Date()
             let duration = endTime.timeIntervalSince(startTime)
             print("Async/Await завантаження тривало \(duration) секунд")
