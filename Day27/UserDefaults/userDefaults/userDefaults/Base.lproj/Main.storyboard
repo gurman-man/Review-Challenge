@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="userDefaults" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s2D-c1-Tb2">
+                                <rect key="frame" x="150.33333333333334" y="182" width="92.666666666666657" height="31.333333333333343"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rqg-wW-PDn">
+                                <rect key="frame" x="122" y="243.33333333333337" width="149" height="31"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OFF" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JBh-Pa-SdQ">
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="31"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="0fv-1u-hqI"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="asv-f7-Rag">
+                                        <rect key="frame" x="100" y="0.0" width="51" height="31"/>
+                                        <connections>
+                                            <action selector="switchChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="3Va-ke-8Gd"/>
+                                        </connections>
+                                    </switch>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Theme" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8pQ-k7-wGr">
+                                <rect key="frame" x="157.33333333333334" y="295" width="78.666666666666657" height="31.333333333333314"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="P7o-CP-0yt">
+                                <rect key="frame" x="120.66666666666669" y="356.33333333333331" width="152" height="32"/>
+                                <segments>
+                                    <segment title="Light"/>
+                                    <segment title="Dark"/>
+                                    <segment title="Red"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="qFy-rs-Vir"/>
+                                </connections>
+                            </segmentedControl>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="P7o-CP-0yt" firstAttribute="centerX" secondItem="8pQ-k7-wGr" secondAttribute="centerX" id="7fN-rv-Aaf"/>
+                            <constraint firstItem="8pQ-k7-wGr" firstAttribute="top" secondItem="asv-f7-Rag" secondAttribute="bottom" constant="20.666666666666629" id="ET0-op-KXx"/>
+                            <constraint firstItem="s2D-c1-Tb2" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="UUc-x6-MYw"/>
+                            <constraint firstItem="P7o-CP-0yt" firstAttribute="top" secondItem="8pQ-k7-wGr" secondAttribute="bottom" constant="30" id="Wgb-R6-HaU"/>
+                            <constraint firstItem="s2D-c1-Tb2" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="123" id="ZbC-dT-aCq"/>
+                            <constraint firstItem="rqg-wW-PDn" firstAttribute="top" secondItem="s2D-c1-Tb2" secondAttribute="bottom" constant="30" id="l70-Fa-ybI"/>
+                            <constraint firstItem="8pQ-k7-wGr" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="lX6-nw-pJ5"/>
+                            <constraint firstItem="rqg-wW-PDn" firstAttribute="centerX" secondItem="s2D-c1-Tb2" secondAttribute="centerX" id="zTH-UA-06y"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="onOffLabel" destination="JBh-Pa-SdQ" id="bM6-PD-o7S"/>
+                        <outlet property="onOffSwitch" destination="asv-f7-Rag" id="1d6-Us-bYN"/>
+                        <outlet property="themeSegment" destination="P7o-CP-0yt" id="Yfb-9T-OCT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="123" y="4"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
