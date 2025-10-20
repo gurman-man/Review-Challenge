@@ -10,12 +10,14 @@ import UIKit
 let fm = FileManager.default
 
 let path = fm.urls(for: .documentDirectory, in: .userDomainMask)[0]  // отримуємо шлях до папки Documents
+let path2 = fm.urls(for: .cachesDirectory, in: .userDomainMask).first!
 let file = path.appendingPathComponent("note.txt")                   // створюємо файл note.txt
 
 try "Hello FileManager!".write(to: file, atomically: true, encoding: .utf8)    // збережи текст - Hello FileManager! у UTF-8.
 
 // 🧭 Вивести шлях у консоль
 print("Файл збережено тут: \(file.path)\n")
+print("Caches: \(path2)")
 
 
 // MARK: Завдання 2: - Читання файлу -
