@@ -27,11 +27,8 @@ class NetworkManager {
         // completion — замикання, через яке ми передаємо результат (url картинки)
         
         var urlComponents = URLComponents(string: url)
-<<<<<<< HEAD
         
-=======
->>>>>>> c67f294 (Update Decodable)
-        urlComponents?.path = "/photos/random"
+        urlComponents?.path = "/search/photos"  // endpoint
         
         urlComponents?.queryItems = [
             URLQueryItem(name: "client_id", value: "dYkegnQ8utJN99Wx5QlZbbBWEbj-rjp4ZFFvj8skI2Y"),
